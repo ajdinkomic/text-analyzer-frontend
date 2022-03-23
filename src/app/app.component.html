@@ -94,9 +94,8 @@
 </header>
 
 <main class="p-16">
-  <div *ngIf="textAnalyzers.length > 0" class="space-y-6">
     <div
-      *ngFor="let textAnalyzer of textAnalyzers"
+      *ngFor="let textAnalyzer of (textAnalyzers$ | async)?.textAnalyzers"
       class="sm:rounded-md shadow-md p-6 space-y-6 bg-slate-50/50 border border-slate-200"
     >
       <div class="space-y-2">
@@ -140,6 +139,5 @@
           >
         </p>
       </div>
-    </div>
   </div>
 </main>
