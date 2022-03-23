@@ -93,51 +93,53 @@
   </form>
 </header>
 
-<main class="p-16">
-    <div
-      *ngFor="let textAnalyzer of (textAnalyzers$ | async)?.textAnalyzers"
-      class="sm:rounded-md shadow-md p-6 space-y-6 bg-slate-50/50 border border-slate-200"
-    >
-      <div class="space-y-2">
-        <div class="flex items-center gap-2 text-xs">
-          <p>
-            Parameter:
-            <span class="font-semibold">{{
-              textAnalyzer.userInput.parameter
-            }}</span>
-          </p>
-          <span
-            class="font-semibold rounded-full px-4 py-1"
-            [class]="
-              textAnalyzer.mode === analysisModeEnum.ONLINE
-                ? 'badge-online'
-                : 'badge-offline'
-            "
-          >
-            {{ textAnalyzer.mode }}
-          </span>
-        </div>
-        <blockquote class="p-4 bg-slate-100 text-sm rounded-sm">
-          {{ textAnalyzer.userInput.text }}
-        </blockquote>
-      </div>
-      <hr />
-      <div class="space-y-4">
-        <h5 class="legend">Analysis results</h5>
-        <div class="grid grid-cols-[20px_1fr] gap-x-2 gap-y-1">
-          <ng-container
-            *ngFor="let result of textAnalyzer.analysisResult | keyvalue"
-          >
-            <div class="text-right">{{ result.key | uppercase }}:</div>
-            <div>{{ result.value }}</div>
-          </ng-container>
-        </div>
+<div *ngIf="errorMessage$ | async" class="p-16 pb-0">
+  <h5 class="error-message sm:rounded-md shadow-sm p-4">
+    {{ errorMessage$ | async }}
+  </h5>
+</div>
+
+<main class="p-16 space-y-6">
+  <div
+    *ngFor="let textAnalyzer of textAnalyzers$ | async"
+    class="sm:rounded-md shadow-md p-6 space-y-6 bg-slate-50/50 border border-slate-200"
+  >
+    <div class="space-y-2">
+      <div class="flex items-center gap-2 text-xs">
         <p>
-          <em class="text-sm"
-            >Analysis duration:
-            {{ textAnalyzer.analysisDuration | number: "1.4-4" }} ms</em
-          >
+          Parameter:
+          <span class="font-semibold">{{
+            textAnalyzer.userInput.parameter
+          }}</span>
         </p>
+        <span
+          class="font-semibold rounded-full px-4 py-1"
+          [class]="textAnalyzer.mode === analysisModeEnum.ONLINE ? 'badge-online' : 'badge-offline'"
+        >
+          {{ textAnalyzer.mode }}
+        </span>
       </div>
+      <blockquote class="p-4 bg-slate-100 text-sm rounded-sm">
+        {{ textAnalyzer.userInput.text }}
+      </blockquote>
+    </div>
+    <hr />
+    <div class="space-y-4">
+      <h5 class="legend">Analysis results</h5>
+      <div class="grid grid-cols-[20px_1fr] gap-x-2 gap-y-1">
+        <ng-container
+          *ngFor="let result of textAnalyzer.analysisResult | keyvalue"
+        >
+          <div class="text-right">{{ result.key | uppercase }}:</div>
+          <div>{{ result.value }}</div>
+        </ng-container>
+      </div>
+      <p>
+        <em class="text-sm">
+          Analysis duration:
+          {{ textAnalyzer.analysisDuration | number: "1.4-4" }} ms
+        </em>
+      </p>
+    </div>
   </div>
 </main>

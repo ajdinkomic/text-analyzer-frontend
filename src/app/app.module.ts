@@ -15,7 +15,7 @@ import * as fromApp from './store/app.reducers';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ app: fromApp.appReducer }),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

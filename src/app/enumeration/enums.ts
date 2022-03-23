@@ -1,11 +1,18 @@
 export enum AnalysisModeEnum {
-    NONE = '',
-    ONLINE = 'ONLINE',
-    OFFLINE = 'OFFLINE',
+  NONE = '',
+  ONLINE = 'ONLINE',
+  OFFLINE = 'OFFLINE',
 }
 
 export enum AnalysisParameterEnum {
-    NONE = '',
-    VOWELS = 'VOWELS',
-    CONSONANTS = 'CONSONANTS',
+  NONE = '',
+  VOWELS = 'VOWELS',
+  CONSONANTS = 'CONSONANTS',
+}
+
+export enum AppActionsEnum {
+  NONE = '',
+  ADD_TEXT_ANALYZER = 'ADD_TEXT_ANALYZER',
+  TEXT_ANALYSIS_REQUEST_START = 'TEXT_ANALYSIS_REQUEST_START',
+  TEXT_ANALYSIS_REQUEST_FAIL = 'TEXT_ANALYSIS_REQUEST_FAIL',
 }

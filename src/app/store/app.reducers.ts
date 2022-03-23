@@ -4,10 +4,12 @@ import * as AppActions from './app.actions';
 
 export interface AppState {
   textAnalyzers: TextAnalyzer[];
+  errorMessage: string;
 }
 
 const initialState: AppState = {
   textAnalyzers: [],
+  errorMessage: '',
 };
 
 const _appReducer = createReducer(
@@ -16,6 +18,12 @@ const _appReducer = createReducer(
   on(AppActions.addTextAnalyzer, (state, action) => ({
     ...state,
     textAnalyzers: [action.textAnalyzer, ...state.textAnalyzers],
+    errorMessage: '',
+  })),
+
+  on(AppActions.textAnalysisRequestFail, (state, action) => ({
+    ...state,
+    errorMessage: action.errorMessage,
   }))
 );
 

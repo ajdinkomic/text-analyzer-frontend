@@ -1,19 +1,24 @@
 import { createAction, props } from '@ngrx/store';
+import { AppActionsEnum } from '../enumeration/enums';
 import { TextAnalyzer } from '../models/text-analyzer';
 import { UserInput } from '../models/user-input';
 
-export const ADD_TEXT_ANALYZER = 'ADD_TEXT_ANALYZER';
-export const TEXT_ANALYSIS_REQUEST_START = 'TEXT_ANALYSIS_REQUEST_START';
-
 export const textAnalysisRequestStart = createAction(
-  TEXT_ANALYSIS_REQUEST_START,
+  AppActionsEnum.TEXT_ANALYSIS_REQUEST_START,
   props<{
     userInput: UserInput;
   }>()
 );
 
+export const textAnalysisRequestFail = createAction(
+  AppActionsEnum.TEXT_ANALYSIS_REQUEST_FAIL,
+  props<{
+    errorMessage: string;
+  }>()
+);
+
 export const addTextAnalyzer = createAction(
-  ADD_TEXT_ANALYZER,
+  AppActionsEnum.ADD_TEXT_ANALYZER,
   props<{
     textAnalyzer: TextAnalyzer;
   }>()

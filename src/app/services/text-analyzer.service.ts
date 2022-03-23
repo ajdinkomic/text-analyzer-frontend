@@ -31,8 +31,6 @@ export class TextAnalyzerService {
       text = text.replace(/[aeiou]+/g, '');
     }
 
-    console.log('Text', text);
-
     for (const char of text) {
       if (textAnalyzer.analysisResult[char] !== undefined) {
         textAnalyzer.analysisResult[char] += 1;
