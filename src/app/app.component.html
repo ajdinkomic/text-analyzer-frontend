@@ -103,6 +103,7 @@
   <div
     *ngFor="let textAnalyzer of textAnalyzers$ | async"
     class="sm:rounded-md shadow-md p-6 space-y-6 bg-slate-50/50 border border-slate-200"
+    [id]="textAnalyzer.id"
   >
     <div class="space-y-2">
       <div class="flex items-center gap-2 text-xs">

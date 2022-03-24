@@ -24,6 +24,11 @@ const _appReducer = createReducer(
   on(AppActions.textAnalysisRequestFail, (state, action) => ({
     ...state,
     errorMessage: action.errorMessage,
+  })),
+
+  on(AppActions.textAnalysisOfflineFail, (state, action) => ({
+    ...state,
+    errorMessage: action.errorMessage,
   }))
 );
 

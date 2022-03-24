@@ -10,24 +10,33 @@ export class TextAnalyzerService {
   constructor() {}
 
   analyzeText(userInput: UserInput): TextAnalyzer {
-    const timerStart: number = performance.now();
-
     const textAnalyzer: TextAnalyzer = {
       id: '',
       userInput: {
         text: '',
-        parameter: '',
+        parameter: AnalysisParameterEnum.NONE,
       },
       analysisResult: {},
       analysisDuration: 0,
       mode: '',
     };
 
+    if (
+      !userInput ||
+      !userInput.text ||
+      !userInput.parameter ||
+      (userInput.parameter !== AnalysisParameterEnum.VOWELS && userInput.parameter !== AnalysisParameterEnum.CONSONANTS)
+    ) {
+      return textAnalyzer;
+    }
+
+    const timerStart: number = performance.now();
+
     let text: string = userInput.text.replace(/[^a-zA-Z]/g, '').toLowerCase();
 
     if (userInput.parameter === AnalysisParameterEnum.VOWELS) {
       text = text.replace(/[^aeiou]+/g, '');
-    } else {
+    } else if (userInput.parameter === AnalysisParameterEnum.CONSONANTS) {
       text = text.replace(/[aeiou]+/g, '');
     }
 

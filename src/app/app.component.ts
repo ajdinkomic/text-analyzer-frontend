@@ -43,7 +43,15 @@ export class AppComponent {
       this.store.dispatch(AppActions.textAnalysisRequestStart({ userInput }));
     } else {
       const textAnalyzer = this.textAnalyzerService.analyzeText(userInput);
-      this.store.dispatch(AppActions.addTextAnalyzer({ textAnalyzer }));
+
+      if (textAnalyzer.id.length) {
+        this.store.dispatch(AppActions.addTextAnalyzer({ textAnalyzer }));
+      } else {
+        const errorMessage: string = 'Your last offline analysis failed! Please, check your parameters and try again.';
+        this.store.dispatch(
+          AppActions.textAnalysisOfflineFail({ errorMessage })
+        );
+      }
     }
   }
 }

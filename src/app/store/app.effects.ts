@@ -11,7 +11,7 @@ const handleError = (errorResponse: any) => {
     Your last request failed!
     Response from the server: "${errorResponse.error.error}".
     Status: ${errorResponse.error.status}.
-    Please, try again.
+    Please, check your parameters and try again.
   `;
 
   return of(AppActions.textAnalysisRequestFail({ errorMessage }));

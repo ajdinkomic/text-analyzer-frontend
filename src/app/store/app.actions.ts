@@ -23,3 +23,10 @@ export const addTextAnalyzer = createAction(
     textAnalyzer: TextAnalyzer;
   }>()
 );
+
+export const textAnalysisOfflineFail = createAction(
+  AppActionsEnum.TEXT_ANALYSIS_OFFLINE_FAIL,
+  props<{
+    errorMessage: string;
+  }>()
+);
