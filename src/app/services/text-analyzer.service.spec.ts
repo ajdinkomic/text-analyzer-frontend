@@ -16,32 +16,32 @@ describe('TextAnalyzerService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should analyze vowels', () => {
+  it('should analyze for vowels', () => {
     const userInput: UserInput = {
-      text: 'Random sentence to be analyzed',
+      text: 'Random sentence to be analyzed.!"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł',
       parameter: AnalysisParameterEnum.VOWELS,
     };
 
-    const textAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
 
-    expect(textAnalyzer).toBeTruthy();
-    expect(textAnalyzer.analysisResult).toEqual({
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.analysisResult).toEqual({
       a: 3,
       e: 5,
       o: 2,
     });
   });
 
-  it('should analyze consonants', () => {
+  it('should analyze for consonants', () => {
     const userInput: UserInput = {
-      text: 'Random sentence to be analyzed',
+      text: 'Random sentence to be analyzed.!"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł',
       parameter: AnalysisParameterEnum.CONSONANTS,
     };
 
-    const textAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
 
-    expect(textAnalyzer).toBeTruthy();
-    expect(textAnalyzer.analysisResult).toEqual({
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.analysisResult).toEqual({
       r: 1,
       n: 4,
       d: 2,
@@ -56,18 +56,48 @@ describe('TextAnalyzerService', () => {
     });
   });
 
-  it('should return empty analysis result', () => {
+  it('should analyze for incorrect parameter', () => {
     const userInput: UserInput = {
-      text: 'Random sentence to be analyzed',
+      text: 'Random sentence to be analyzed.!"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł',
       parameter: AnalysisParameterEnum.NONE,
     };
 
-    const textAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
 
-    expect(textAnalyzer).toBeTruthy();
-    expect(textAnalyzer.id).toEqual('');
-    expect(textAnalyzer.analysisResult).toEqual({});
-    expect(textAnalyzer.analysisDuration).toEqual(0);
-    expect(textAnalyzer.mode).toEqual('');
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.id).toEqual('');
+    expect(actualTextAnalyzer.analysisResult).toEqual({});
+    expect(actualTextAnalyzer.analysisDuration).toEqual(0);
+    expect(actualTextAnalyzer.mode).toEqual('');
+  });
+
+  it('should analyze blank text for vowels', () => {
+    const userInput: UserInput = {
+      text: '  ',
+      parameter: AnalysisParameterEnum.VOWELS,
+    };
+
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.id).toEqual('');
+    expect(actualTextAnalyzer.analysisResult).toEqual({});
+    expect(actualTextAnalyzer.analysisDuration).toEqual(0);
+    expect(actualTextAnalyzer.mode).toEqual('');
+  });
+
+  it('should analyze blank text for consonants', () => {
+    const userInput: UserInput = {
+      text: '  ',
+      parameter: AnalysisParameterEnum.CONSONANTS,
+    };
+
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.id).toEqual('');
+    expect(actualTextAnalyzer.analysisResult).toEqual({});
+    expect(actualTextAnalyzer.analysisDuration).toEqual(0);
+    expect(actualTextAnalyzer.mode).toEqual('');
   });
 });
