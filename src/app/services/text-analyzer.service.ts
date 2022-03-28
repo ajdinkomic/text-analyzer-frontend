@@ -10,6 +10,7 @@ export class TextAnalyzerService {
   constructor() {}
 
   analyzeText(userInput: UserInput): TextAnalyzer {
+    // Create textAnalyzer object with empty properties
     const textAnalyzer: TextAnalyzer = {
       id: '',
       userInput: {
@@ -21,25 +22,32 @@ export class TextAnalyzerService {
       mode: '',
     };
 
+    // Return empty object if text or parameter is incorrect
     if (
       !userInput ||
       !userInput.text ||
+      !userInput.text.replace(/\s+/g,'').length ||
       !userInput.parameter ||
       (userInput.parameter !== AnalysisParameterEnum.VOWELS && userInput.parameter !== AnalysisParameterEnum.CONSONANTS)
     ) {
       return textAnalyzer;
     }
 
+    // Start timer
     const timerStart: number = performance.now();
 
-    let text: string = userInput.text.replace(/[^a-zA-Z]/g, '').toLowerCase();
+    // Transform text to lower case and replace all non-letter characters with empty string
+    let text: string = userInput.text.toLowerCase().replace(/[^a-z]/g, '');
 
     if (userInput.parameter === AnalysisParameterEnum.VOWELS) {
+      // Remove all consonants
       text = text.replace(/[^aeiou]+/g, '');
-    } else if (userInput.parameter === AnalysisParameterEnum.CONSONANTS) {
+    } else {
+      // Remove all vowels
       text = text.replace(/[aeiou]+/g, '');
     }
 
+    // Store analysis result to textAnalyzer's analysisResult property by iterating over text
     for (const char of text) {
       if (textAnalyzer.analysisResult[char] !== undefined) {
         textAnalyzer.analysisResult[char] += 1;
@@ -48,6 +56,7 @@ export class TextAnalyzerService {
       }
     }
 
+    // End timer and calculate time elapsed
     const timerEnd: number = performance.now();
     const duration = timerEnd - timerStart;
 
