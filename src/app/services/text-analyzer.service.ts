@@ -24,11 +24,9 @@ export class TextAnalyzerService {
 
     // Return empty object if text or parameter is incorrect
     if (
-      !userInput ||
-      !userInput.text ||
-      !userInput.text.replace(/\s+/g,'').length ||
-      !userInput.parameter ||
-      (userInput.parameter !== AnalysisParameterEnum.VOWELS && userInput.parameter !== AnalysisParameterEnum.CONSONANTS)
+      !userInput?.text?.replace(/\s+/g, '').length ||
+      (userInput?.parameter !== AnalysisParameterEnum.VOWELS &&
+        userInput.parameter !== AnalysisParameterEnum.CONSONANTS)
     ) {
       return textAnalyzer;
     }
@@ -49,7 +47,7 @@ export class TextAnalyzerService {
 
     // Store analysis result to textAnalyzer's analysisResult property by iterating over text
     for (const char of text) {
-      if (textAnalyzer.analysisResult[char] !== undefined) {
+      if (char in textAnalyzer.analysisResult) {
         textAnalyzer.analysisResult[char] += 1;
       } else {
         textAnalyzer.analysisResult[char] = 1;

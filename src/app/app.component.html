@@ -1,4 +1,4 @@
-<header class="bg-slate-200 px-16 py-8 shadow-sm">
+<header class="bg-slate-200 px-8 md:px-16 py-8 shadow-sm">
   <form
     [formGroup]="textAnalyzerForm"
     (ngSubmit)="onSubmit()"
@@ -93,13 +93,13 @@
   </form>
 </header>
 
-<div *ngIf="errorMessage$ | async" class="p-16 pb-0">
+<div *ngIf="errorMessage$ | async" class="p-8 md:p-16 pb-0">
   <h5 class="error-message sm:rounded-md shadow-sm p-4">
     {{ errorMessage$ | async }}
   </h5>
 </div>
 
-<main class="p-16 space-y-6">
+<main class="p-8 md:p-16 space-y-6">
   <div
     *ngFor="let textAnalyzer of textAnalyzers$ | async"
     class="sm:rounded-md shadow-md p-6 space-y-6 bg-slate-50/50 border border-slate-200"

@@ -48,10 +48,15 @@ export class AppComponent {
         this.store.dispatch(AppActions.addTextAnalyzer({ textAnalyzer }));
       } else {
         const errorMessage: string = 'Your last offline analysis failed! Please, check your parameters and try again.';
-        this.store.dispatch(
-          AppActions.textAnalysisOfflineFail({ errorMessage })
-        );
+        this.store.dispatch(AppActions.textAnalysisOfflineFail({ errorMessage }));
       }
     }
+
+    // Reset the form to default values
+    this.textAnalyzerForm.setValue({
+      text: '',
+      parameter: this.analysisParameterEnum.VOWELS,
+      mode: this.analysisModeEnum.ONLINE,
+    });
   }
 }
