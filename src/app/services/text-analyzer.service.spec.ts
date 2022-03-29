@@ -100,4 +100,28 @@ describe('TextAnalyzerService', () => {
     expect(actualTextAnalyzer.analysisDuration).toEqual(0);
     expect(actualTextAnalyzer.mode).toEqual('');
   });
+
+  it('should analyze only non letters for vowels', () => {
+    const userInput: UserInput = {
+      text: '.!"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł',
+      parameter: AnalysisParameterEnum.VOWELS,
+    };
+
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.analysisResult).toEqual({});
+  });
+
+  it('should analyze only non letters for consonants', () => {
+    const userInput: UserInput = {
+      text: '.!"#$%&/()=?*-_.:,;@{}[]€|\\÷×¤ß~ˇ^~˘°˛`˙´˝¨¸§<>Łł',
+      parameter: AnalysisParameterEnum.CONSONANTS,
+    };
+
+    const actualTextAnalyzer: TextAnalyzer = service.analyzeText(userInput);
+
+    expect(actualTextAnalyzer).toBeTruthy();
+    expect(actualTextAnalyzer.analysisResult).toEqual({});
+  });
 });
